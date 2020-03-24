@@ -12,3 +12,5 @@ List of tests:
 Related issues: 
 - https://github.com/nhibernate/nhibernate-core/issues/2334
 - https://github.com/OData/WebApi/issues/2015
+
+EntityFrameworkCore test: https://github.com/fairking/EfOdataTest
