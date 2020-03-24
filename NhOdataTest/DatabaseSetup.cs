@@ -49,7 +49,7 @@ namespace NhOdataTest
 
                                 var rng = new Random();
 
-                                var entities = Enumerable.Range(1, 7).Select(index => new WeatherForecast
+                                var entities = Enumerable.Range(1, 25).Select(index => new WeatherForecast
                                 {
                                     Date = DateTime.Now.AddDays(index),
                                     TemperatureC = rng.Next(-20, 55),
