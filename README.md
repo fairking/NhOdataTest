@@ -1,6 +1,6 @@
 # NhOdataTest
 
-Testing NHibernate, Automapper and Odata together
+Testing [NHibernate](https://github.com/nhibernate/nhibernate-core), [Automapper](https://github.com/AutoMapper/AutoMapper) and [Odata](https://github.com/OData/WebApi) together
 
 List of tests:
 - The url `https://localhost:5001/odata/weatherforecast` gives data;
