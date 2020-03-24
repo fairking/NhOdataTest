@@ -9,4 +9,6 @@ List of tests:
 - ERROR `https://localhost:5001/odata/weatherforecast?$select=id,summary` throws an error;
 - ERROR `https://localhost:5001/odata/weatherforecast?$apply=groupby((summary), aggregate(temperatureC with average as total))` throws an error;
 
-Related issue: https://github.com/nhibernate/nhibernate-core/issues/2334
+Related issues: 
+- https://github.com/nhibernate/nhibernate-core/issues/2334
+- https://github.com/OData/WebApi/issues/2015
