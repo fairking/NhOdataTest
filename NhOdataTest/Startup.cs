@@ -26,6 +26,7 @@ namespace NhOdataTest
         {
             services.AddControllers();
             services.AddOData();
+            services.AddODataQueryFilter();
             services.AddNHibernate("Data Source=nhodatatest.db;Version=3");
             services.AddAutoMapper((cfg) => { cfg.DisableConstructorMapping(); }, typeof(Program).Assembly);
         }
