@@ -20,7 +20,7 @@
     "NhOdataTest": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "odata/weatherforecast?$select=id,summary",
+      "launchUrl": "odata/weatherforecast",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
