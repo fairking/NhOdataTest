@@ -15,6 +15,8 @@ namespace NhOdataTest.ViewModels
         public int TemperatureF { get; set; }
 
         public string Summary { get; set; }
+
+        public string Town2 { get; set; }
     }
 
     public class WeatherForecastVmAutoMapperProfile : Profile
@@ -23,7 +25,8 @@ namespace NhOdataTest.ViewModels
         {
             CreateMap<WeatherForecast, WeatherForecastVm>()
                 .ForMember(d => d.TemperatureF, map => map.MapFrom(s => 32 + (int)(s.TemperatureC / 0.5556)))
-                .ForMember(d => d.Town, map => map.MapFrom(s => s.Town.Name));
+                .ForMember(d => d.Town, map => map.MapFrom(s => s.Town.Name))
+                .ForMember(d => d.Town2, map => map.MapFrom(s => s.Town.Name));
         }
     }
 }
