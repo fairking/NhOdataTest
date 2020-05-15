@@ -2,6 +2,7 @@
 using Microsoft.AspNet.OData;
 using Microsoft.AspNetCore.Mvc;
 using NHibernate;
+using NHibernate.Linq;
 using NhOdataTest.Entities;
 using NhOdataTest.ViewModels;
 
@@ -24,7 +25,7 @@ namespace NhOdataTest.Controllers
         [EnableQuery]
         public IActionResult Get()
         {
-            return Ok(_mapper.ProjectTo<WeatherForecastVm>(_session.Query<WeatherForecast>()));
+            return Ok(_mapper.ProjectTo<WeatherForecastVm>(_session.Query<WeatherForecast>().Fetch(x => x.Town)));
         }
     }
 }
