@@ -9,7 +9,7 @@ List of tests:
 - ERROR `https://localhost:5001/odata/weatherforecast?$select=id,summary` (Fixed: [#2079](https://github.com/nhibernate/nhibernate-core/pull/2079))
 - ERROR `https://localhost:5001/odata/weatherforecast?$apply=groupby((summary), aggregate(temperatureC with average as total))` (Fixed: [#2322](https://github.com/nhibernate/nhibernate-core/pull/2322))
 - ERROR `https://localhost:5001/odata/weatherforecast?$filter=town eq 'London'` (Bug: [#2380](https://github.com/nhibernate/nhibernate-core/issues/2380))
-- OK `https://localhost:5001/odata/weatherforecast?$filter=town%20eq%20%27London%27`
+- OK `https://localhost:5001/odata/weatherforecast?$filter=town eq 'London'`
 
 Related issues: 
 - https://github.com/nhibernate/nhibernate-core/issues/2334
