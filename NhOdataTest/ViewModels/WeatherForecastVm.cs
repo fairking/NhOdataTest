@@ -6,8 +6,6 @@ namespace NhOdataTest.ViewModels
 {
     public class WeatherForecastVm : BaseWeatherForecastVm
     {
-        public Guid Id { get; set; }
-
         public DateTime Date { get; set; }
 
         public int TemperatureC { get; set; }
