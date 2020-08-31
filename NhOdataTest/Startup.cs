@@ -1,14 +1,8 @@
-﻿using System.Linq;
-using AutoMapper;
-using Microsoft.AspNet.OData.Builder;
-using Microsoft.AspNet.OData.Extensions;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.OData.Edm;
 using NhOdataTest.StartupExtensions;
-using NhOdataTest.ViewModels;
 
 namespace NhOdataTest
 {
@@ -25,10 +19,7 @@ namespace NhOdataTest
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers().AddNewtonsoftJson();
-            services.AddOData();
-            services.AddODataQueryFilter();
             services.AddNHibernate("Data Source=nhodatatest.db;Version=3");
-            services.AddAutoMapper((cfg) => { cfg.DisableConstructorMapping(); }, typeof(Program).Assembly);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -42,19 +33,10 @@ namespace NhOdataTest
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllers();
-                endpoints.EnableDependencyInjection();
-                endpoints.Expand().Select().Count().OrderBy().Filter().MaxTop(100);
-                endpoints.MapODataRoute("odata", "odata", GetEdmModel());
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
             });
-        }
-
-        public static IEdmModel GetEdmModel()
-        {
-            var builder = new ODataConventionModelBuilder();
-            builder.EntitySet<WeatherForecastVm>("WeatherForecast");
-            builder.EnableLowerCamelCase();
-            return builder.GetEdmModel();
         }
     }
 }

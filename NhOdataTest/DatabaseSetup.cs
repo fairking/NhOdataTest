@@ -67,6 +67,12 @@ namespace NhOdataTest
                                 foreach (var entity in entities)
                                 {
                                     session.SaveOrUpdate(entity);
+
+                                    entity.DewPoints.Add(new DewPoint(entity, entity.Date.AddHours(3).ToUniversalTime(), DewPointTypeEnum.Low));
+                                    entity.DewPoints.Add(new DewPoint(entity, entity.Date.AddHours(6).ToUniversalTime(), DewPointTypeEnum.Normal));
+                                    entity.DewPoints.Add(new DewPoint(entity, entity.Date.AddHours(9).ToUniversalTime(), DewPointTypeEnum.High));
+                                    foreach (var point in entity.DewPoints)
+                                        session.SaveOrUpdate(point);
                                 }
 
                                 tran.Commit();
@@ -88,6 +94,23 @@ namespace NhOdataTest
 
             if (error != null)
                 throw error;
+
+            // Break database
+            using (var scope = host.Services.CreateScope())
+            {
+                var services = scope.ServiceProvider;
+                var session = services.GetRequiredService<ISession>();
+
+                using (var tran = session.BeginTransaction())
+                {
+                    // Breaking one of the enums
+                    session
+                        .CreateSQLQuery("update dew_point set type = 'Normal2' where type = 'Normal'")
+                        .ExecuteUpdate();
+
+                    tran.Commit();
+                }
+            }
 
             return host;
         }

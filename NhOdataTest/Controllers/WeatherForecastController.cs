@@ -1,31 +1,32 @@
-﻿using AutoMapper;
-using Microsoft.AspNet.OData;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using NHibernate;
 using NHibernate.Linq;
 using NhOdataTest.Entities;
-using NhOdataTest.ViewModels;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace NhOdataTest.Controllers
 {
-    [Route("/odata/[controller]")]
-    [ApiController]
     public class WeatherForecastController : ControllerBase
     {
         private readonly ISession _session;
-        private readonly IMapper _mapper;
 
-        public WeatherForecastController(ISession session, IMapper mapper)
+        public WeatherForecastController(ISession session)
         {
             _session = session;
-            _mapper = mapper;
         }
 
         [HttpGet]
-        [EnableQuery]
-        public IActionResult Get()
+        public async Task<IActionResult> GetDewPoints()
         {
-            return Ok(_mapper.ProjectTo<WeatherForecastVm>(_session.Query<WeatherForecast>().Fetch(x => x.Town)));
+            // Reproducing the issue https://github.com/nhibernate/nhibernate-core/issues/2470
+
+            var forecast = await _session.Query<WeatherForecast>().FirstOrDefaultAsync();
+
+            var dewPoints = forecast.DewPoints.Where(x => x.Type == DewPointTypeEnum.Normal).ToList();
+
+            return Ok(new { Count = dewPoints.Count });
         }
+
     }
 }

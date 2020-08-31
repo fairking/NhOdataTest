@@ -20,7 +20,7 @@
     "NhOdataTest": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "odata/weatherforecast",
+      "launchUrl": "WeatherForecast/GetDewPoints",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },

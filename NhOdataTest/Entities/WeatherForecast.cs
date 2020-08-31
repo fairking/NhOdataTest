@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace NhOdataTest.Entities
 {
@@ -14,6 +15,7 @@ namespace NhOdataTest.Entities
                 throw new ArgumentNullException(nameof(town));
 
             Town = town;
+            DewPoints = new HashSet<DewPoint>();
         }
 
         public virtual Guid Id { get; set; }
@@ -25,5 +27,8 @@ namespace NhOdataTest.Entities
         public virtual string Summary { get; set; }
 
         public virtual Town Town { get; protected set; }
+
+        public virtual ISet<DewPoint> DewPoints { get; protected set; }
     }
+
 }
