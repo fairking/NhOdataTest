@@ -28,5 +28,24 @@ namespace NhOdataTest.Controllers
             return Ok(new { Count = dewPoints.Count });
         }
 
+        [HttpGet]
+        public async Task<IActionResult> GetDewPoints2()
+        {
+            // Reproducing the issue https://github.com/nhibernate/nhibernate-core/issues/2470
+
+            var forecast = await _session.Query<WeatherForecast>().FirstOrDefaultAsync();
+
+            try
+            {
+                var dewPoints = forecast.DewPoints.ToList();
+            }
+            catch
+            {
+                var dewPoints = forecast.DewPoints.ToList();
+            }
+
+            return Ok();
+        }
+
     }
 }
